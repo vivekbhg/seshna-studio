@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import SiteHeader from "./ui/SiteHeader";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -15,24 +15,15 @@ export default function RootLayout({
     <html lang="fr">
       <body>
         <div className="container">
-          <header className="site-header">
-            <Link href="/" className="site-title">
-              seshna gungah<span>architecte urbaniste</span>
-            </Link>
-            <nav className="site-nav">
-              <Link href="/#architecture">architecture</Link>
-              <Link href="/#scenographie">scénographie</Link>
-              <Link href="/#bijoux">bijoux</Link>
-              <Link href="/a-propos">à propos</Link>
-            </nav>
-          </header>
+          <SiteHeader />
           {children}
           <footer className="site-footer">
             <div>
               <a href="mailto:seshna.gungah.archi@gmail.com">
                 seshna.gungah.archi@gmail.com
               </a>
-              {" — 06 62 12 56 36"}
+              <span className="sep"> — </span>
+              <span>06 62 12 56 36</span>
             </div>
             <div className="handles">
               <a

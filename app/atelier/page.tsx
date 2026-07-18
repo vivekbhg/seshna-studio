@@ -46,12 +46,13 @@ export default async function AtelierPage({
             + nouveau projet
           </Link>
           <form action={logout}>
-            <button type="submit" className="btn muted">
+            <button type="submit" className="action">
               sortir
             </button>
           </form>
         </div>
       </div>
+      <div className="atelier-table-wrap">
       <table className="atelier-table">
         <thead>
           <tr>
@@ -77,6 +78,7 @@ export default async function AtelierPage({
           ))}
         </tbody>
       </table>
+      </div>
     </main>
   );
 }

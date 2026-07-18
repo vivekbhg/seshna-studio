@@ -23,7 +23,12 @@ function ProjectCard({ project }: { project: Project }) {
         )}
       </div>
       <div className="caption">
-        <h3>{project.title}</h3>
+        <h3>
+          <span className="num">
+            {String(project.sort_order).padStart(2, "0")}
+          </span>
+          {project.title}
+        </h3>
         <p>
           {[project.subtitle, project.year_label].filter(Boolean).join(" · ")}
         </p>
