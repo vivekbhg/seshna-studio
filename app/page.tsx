@@ -54,9 +54,6 @@ export default async function Home() {
           <section key={d.id} id={d.slug} className="section">
             <div className="section-head">
               <h2>{d.label}</h2>
-              <span className="mirror" aria-hidden="true">
-                {d.label}
-              </span>
               <span className="count">{items.length}</span>
             </div>
             <div className="grid">
