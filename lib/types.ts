@@ -14,6 +14,8 @@ export type ProjectImage = {
   height: number | null;
   is_cover: boolean;
   sort_order: number;
+  /** 'repo' = file committed under public/images, 'bucket' = seshna storage bucket */
+  source: "repo" | "bucket";
 };
 
 export type Project = {
@@ -34,6 +36,7 @@ export type Project = {
   awards: string | null;
   image_credits: string | null;
   featured: boolean;
+  published: boolean;
   sort_order: number;
   seshna_disciplines: Discipline;
   seshna_project_images: ProjectImage[];
