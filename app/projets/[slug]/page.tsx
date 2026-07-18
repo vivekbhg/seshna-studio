@@ -70,7 +70,7 @@ export default async function ProjectPage({
               {project.seshna_project_images.map((img) => (
                 <img
                   key={img.id}
-                  src={imageUrl(img.storage_path)}
+                  src={imageUrl(img.storage_path, img.source)}
                   alt={img.alt ?? project.title}
                   loading="lazy"
                 />
@@ -81,7 +81,7 @@ export default async function ProjectPage({
               {project.seshna_project_images.map((img) => (
                 <img
                   key={img.id}
-                  src={imageUrl(img.storage_path)}
+                  src={imageUrl(img.storage_path, img.source)}
                   alt={img.alt ?? project.title}
                   loading="lazy"
                   width={img.width ?? undefined}

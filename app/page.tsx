@@ -14,7 +14,7 @@ function ProjectCard({ project }: { project: Project }) {
       <div className="frame">
         {cover && (
           <img
-            src={imageUrl(cover.storage_path)}
+            src={imageUrl(cover.storage_path, cover.source)}
             alt={cover.alt ?? project.title}
             loading="lazy"
             width={cover.width ?? undefined}

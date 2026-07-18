@@ -40,3 +40,24 @@ npm run dev
 - `/` — projets groupés par discipline
 - `/projets/[slug]` — fiche projet (faits + description + images ; grille pour bijoux, culinaire, vidéos)
 - `/a-propos` — bio, parcours, logiciels, contacts
+
+## Atelier (administration)
+
+`/atelier` est une interface d'administration non référencée (`noindex`, aucun lien depuis le site) protégée par une phrase de passe. Elle permet de :
+
+- modifier tous les champs d'un projet, le publier/dépublier, le mettre à la une ;
+- ajouter, supprimer, réordonner, pivoter les images, choisir la couverture, éditer les textes alternatifs ;
+- créer de nouveaux projets (créés en brouillon, slug généré depuis le titre).
+
+### Fonctionnement
+
+- La phrase de passe est vérifiée côté base : son hash SHA-256 est stocké dans `seshna_admin_config` (RLS sans politique — invisible via l'API). La session est un cookie `HttpOnly` de 30 jours.
+- Les écritures passent par des fonctions RPC `security definer` (`seshna_admin_*`) qui vérifient la phrase de passe à chaque appel — aucune clé service role dans l'application.
+- Les fichiers (upload/suppression) passent par l'edge function `seshna-admin-files`, seule détentrice du service role, qui écrit dans le bucket public `seshna`.
+- Les images sont retraitées au téléversement (`sharp` : orientation EXIF, max 1600 px, JPEG q85). La rotation (90° anti-horaire) régénère le fichier ; une image historique du dépôt (`source = 'repo'`) migre alors automatiquement vers le bucket (`source = 'bucket'`).
+
+Pour changer la phrase de passe :
+
+```sql
+update seshna_admin_config set passphrase_hash = encode(sha256('nouvelle-phrase'::bytea), 'hex');
+```
