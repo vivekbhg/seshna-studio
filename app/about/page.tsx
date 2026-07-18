@@ -3,7 +3,7 @@ import { imageUrl } from "@/lib/images";
 
 export const dynamic = "force-dynamic";
 
-export const metadata = { title: "à propos — seshna gungah" };
+export const metadata = { title: "about — seshna gungah" };
 
 export default async function AboutPage() {
   const [profile, experiences] = await Promise.all([
