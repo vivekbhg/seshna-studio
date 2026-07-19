@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import SiteHeader from "./ui/SiteHeader";
+import { MotionProvider } from "./ui/motion";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -15,8 +16,10 @@ export default function RootLayout({
     <html lang="fr">
       <body>
         <div className="container">
-          <SiteHeader />
-          {children}
+          <MotionProvider>
+            <SiteHeader />
+            {children}
+          </MotionProvider>
           <footer className="site-footer">
             <div>
               <a href="mailto:seshna.gungah.archi@gmail.com">
