@@ -262,6 +262,12 @@ button {
   }
 }
 
+/* full-height slot so the sticky facts column keeps working
+   inside its animation wrapper */
+.facts-slot {
+  align-self: stretch;
+}
+
 .facts {
   position: sticky;
   top: 2rem;

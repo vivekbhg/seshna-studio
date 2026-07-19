@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Reveal } from "./ui/motion";
 import { getDisciplines, getProjects } from "@/lib/data";
 import { imageUrl } from "@/lib/images";
 import type { Project } from "@/lib/types";
@@ -52,13 +53,17 @@ export default async function Home() {
         if (items.length === 0) return null;
         return (
           <section key={d.id} id={d.slug} className="section">
-            <div className="section-head">
-              <h2>{d.label}</h2>
-              <span className="count">{items.length}</span>
-            </div>
+            <Reveal>
+              <div className="section-head">
+                <h2>{d.label}</h2>
+                <span className="count">{items.length}</span>
+              </div>
+            </Reveal>
             <div className="grid">
-              {items.map((p) => (
-                <ProjectCard key={p.id} project={p} />
+              {items.map((p, i) => (
+                <Reveal key={p.id} delay={(i % 3) * 0.08}>
+                  <ProjectCard project={p} />
+                </Reveal>
               ))}
             </div>
           </section>

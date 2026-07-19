@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 const LINKS = [
   { href: "/", label: "index" },
@@ -44,15 +45,36 @@ export default function SiteHeader() {
           {open ? "×" : "+"}
         </button>
       </div>
-      {open && (
-        <nav className="menu-overlay">
-          {LINKS.map((l) => (
-            <Link key={l.href} href={l.href} onClick={() => setOpen(false)}>
-              {l.label}
-            </Link>
-          ))}
-        </nav>
-      )}
+      <AnimatePresence>
+        {open && (
+          <motion.nav
+            className="menu-overlay"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            style={{ overflow: "hidden" }}
+          >
+            {LINKS.map((l, i) => (
+              <motion.div
+                key={l.href}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  duration: 0.3,
+                  delay: 0.05 + i * 0.04,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+              >
+                <Link href={l.href} onClick={() => setOpen(false)}>
+                  {l.label}
+                </Link>
+              </motion.div>
+            ))}
+          </motion.nav>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
